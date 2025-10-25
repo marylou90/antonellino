@@ -1,0 +1,24 @@
+backend:
+  name: git-gateway # Metodo comune per Netlify/GitHub
+  branch: main      # Il ramo Git dove salvare i contenuti
+
+# Definisci le cartelle per l'upload media
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "post"
+    label: "Articoli del Blog"
+    folder: "_posts"
+    create: true
+    # FORMATO NOME FILE: CRUCIALE per Jekyll
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" 
+    fields:
+      # Campi nascosti per la logica di Jekyll
+      - {label: "Layout", name: "layout", widget: "hidden", default: "post"}
+      # Campi visibili per il blogger
+      - {label: "Titolo", name: "title", widget: "string", required: true}
+      - {label: "Data Pubblicazione", name: "date", widget: "datetime"}
+      - {label: "Categoria (Singola)", name: "categories", widget: "string"}
+      - {label: "Tag (separati da virgola)", name: "tags", widget: "list", required: false}
+      - {label: "Contenuto", name: "body", widget: "markdown"}
