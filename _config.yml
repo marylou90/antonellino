@@ -53,3 +53,8 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+backend:
+  name: git-gateway
+  # Il ramo deve corrispondere al ramo principale del tuo repository su GitHub (solitamente "main" o "master")
+  branch: main
