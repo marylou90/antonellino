@@ -7,8 +7,6 @@ backend:
 
 media_folder: "assets/uploads" # Dove verranno salvate le immagini nel tuo repository (relativo alla root del progetto)
 public_folder: "/assets/uploads" # Come verranno referenziate le immagini nel codice HTML (relativo alla root del sito)
-media_library: # La libreria multimediale da utilizzare
-  name: upload
 
 # ---------------------------------------------
 # DEFINIZIONE DELLE COLLEZIONI
