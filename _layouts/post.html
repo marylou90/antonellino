@@ -2,24 +2,49 @@
 layout: default
 ---
 
-{% include site-header.html %}
+<div class="page-content">
+  <div class="wrapper">
+    <article class="post-content" itemscope itemtype="http://schema.org/BlogPosting">
+        
+      <header class="post-header">
+        <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+        
+        {% comment %} Metadati del Post (Data e eventuale Autore) {% endcomment %}
+        <p class="post-meta">
+          Pubblicato il <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%d %B, %Y" }}</time>
+          {% if page.author %}
+            da <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
+          {% endif %}
+        </p>
 
-<main class="main  container">
+        {% comment %} Immagine in evidenza (se presente) {% endcomment %}
+        {% if page.image %}
+          <div class="post-image-container">
+            <img src="{{ page.image | relative_url }}" alt="{{ page.title | escape }}" itemprop="image">
+          </div>
+        {% endif %}
 
-  <article class="article  article--post  content  typeset">
+      </header>
 
-    <h1>{{ page.title }}</h1>
-    {% include post-meta.html %}
-    {{ content }}
+      {% comment %} Contenuto principale del post (Markdown) {% endcomment %}
+      <div class="post-entry e-content" itemprop="articleBody">
+        {{ content }}
+      </div>
 
-    {% include nav-share.html %}
+      {% comment %} Link ai Social Media (opzionale - richiede Alembic Includes) {% endcomment %}
+      {% include sharing-links.html %}
 
-    {% include post-comments.html %}
+      {% comment %} Paginazione (se presente) {% endcomment %}
+      {% if site.alembic.post_navigation %}
+        {% include post-navigation.html %}
+      {% endif %}
 
-  </article>
+    </article>
+    
+    {% comment %} Inclusione di Disqus o Commenti (se configurati nel _config.yml) {% endcomment %}
+    {% if site.disqus %}
+      {% include disqus.html %}
+    {% endif %}
 
-  {% if page.aside == true %}{% include site-aside.html %}{% endif %}
-
-</main>
-
-{% include site-footer.html %}
+  </div>
+</div>
