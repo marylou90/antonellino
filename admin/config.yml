@@ -1,39 +1,44 @@
+# ---------------------------------------------
+# CONFIGURAZIONE BACKEND (GIT GATEWAY)
+# ---------------------------------------------
 backend:
-  name: github
-  repo: marylou90/antonellino
-  branch: main                
+  name: git-gateway
+  # Assicurati che il ramo sia corretto (solitamente 'main' su GitHub)
+  branch: main 
 
-# Definisci le cartelle per l'upload media
-media_folder: "assets/uploads"
-public_folder: "/assets/uploads"
-
+# ---------------------------------------------
+# DEFINIZIONE DELLE COLLEZIONI
+# ---------------------------------------------
 collections:
   
-  # ---------------------------------------------
-  # COLLEZIONE 1: VINI E CANTINE
-  # Useremo le COLLECTIONS DI JEKYLL (cartelle con _)
-  # ---------------------------------------------
-  - name: "vini_cantine"
-    label: "Vini e cantine"
-    # Questa cartella deve esistere e inizia con _ per Jekyll
-    folder: "_vinicantine" 
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+  # 1. COLLEZIONE VINI E CANTINE
+  - name: "vini_e_cantine"
+    label: "Vini e Cantine"
+    # Questa cartella deve esistere nel tuo repository!
+    folder: "_vini_e_cantine" 
     create: true
+    slug: "{{slug}}" # Usa solo il nome pulito nel file (senza data)
     fields:
       - {label: "Titolo", name: "title", widget: "string", required: true}
+      - {label: "Data di Pubblicazione", name: "date", widget: "datetime"}
+      - {label: "Immagine in Evidenza", name: "image", widget: "image", required: false, hint: "Immagine principale per la sezione"}
       - {label: "Contenuto", name: "body", widget: "markdown"}
-      - {label: "Data Pubblicazione", name: "date", widget: "datetime"}
       
-  # ---------------------------------------------
-  # COLLEZIONE 2: RISTORANTI E OSTERIE
-  # ---------------------------------------------
-  - name: "ristoranti_osterie"
-    label: "Ristoranti e osterie"
-    folder: "_ristorantiosterie"
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+  # 2. COLLEZIONE RISTORANTI E OSTERIE
+  - name: "ristoranti_e_osterie"
+    label: "Ristoranti e Osterie"
+    # Questa cartella deve esistere nel tuo repository!
+    folder: "_ristoranti_e_osterie"
     create: true
+    slug: "{{slug}}"
     fields:
       - {label: "Titolo", name: "title", widget: "string", required: true}
+      - {label: "Data di Pubblicazione", name: "date", widget: "datetime"}
+      - {label: "Immagine in Evidenza", name: "image", widget: "image", required: false, hint: "Immagine principale per la sezione"}
       - {label: "Contenuto", name: "body", widget: "markdown"}
-      - {label: "Data Pubblicazione", name: "date", widget: "datetime"}
       
+  # (Se avevi una collezione 'posts' precedente, la puoi aggiungere qui sotto)
+  # - name: "posts"
+  #   label: "Articoli Generali"
+  #   folder: "_posts"
+  #   ... (campi) ...
