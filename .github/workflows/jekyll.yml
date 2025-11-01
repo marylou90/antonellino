@@ -1,0 +1,55 @@
+# Nome del tuo workflow (appare nella tab "Actions" di GitHub)
+name: Deploy Jekyll con Decap CMS (GitHub Pages)
+
+on:
+  # Trigger il deploy quando fai un push sul ramo 'main'
+  push:
+    branches: ["main"]
+  # Permette di eseguire il workflow manualmente dalla tab Actions
+  workflow_dispatch:
+
+# Permessi necessari per il deploy su GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  # Lavoro 1: Compilazione del sito Jekyll
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del codice
+        uses: actions/checkout@v4
+
+      # Configura Ruby (fondamentale per Jekyll)
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1' # Verifica che sia la tua versione locale
+          bundler-cache: true # Installazione delle gemme
+
+      # Esegue il comando di compilazione di Jekyll
+      - name: Build Jekyll Site
+        run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
+      
+      # Carica la cartella _site come artefatto di deploy
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './_site'
+
+  # Lavoro 2: Pubblicazione su GitHub Pages
+  deploy:
+    environment:
+      # Assicurati che l'ambiente sia definito come 'github-pages'
+      name: github-pages 
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build # Dipende dal successo del lavoro 'build'
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
