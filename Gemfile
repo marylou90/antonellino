@@ -28,3 +28,4 @@ platforms :mingw, :x64_mingw, :mswin, :jruby do
 end
 
 gem "jekyll-sitemap"
+gem "jekyll-mentions"
