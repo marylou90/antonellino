@@ -8,7 +8,7 @@ on:
   # Permette di eseguire il workflow manualmente dalla tab Actions
   workflow_dispatch:
 
-# Permessi necessari per il deploy su GitHub Pages
+# Permessi necessari per il deploy su GitHub Pages (necessari per deploy-pages@v4)
 permissions:
   contents: read
   pages: write
@@ -26,16 +26,26 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1' # Verifica che sia la tua versione locale
-          bundler-cache: true # Installazione delle gemme
+          # Usa una versione supportata e stabile di Ruby
+          ruby-version: '3.1' 
+          # Il gestore della cache è disabilitato per evitare conflitti con 'gem install'
+          
+      # Passo aggiunto per risolvere l'errore 'gem failed with exit code 1'
+      - name: Update Bundler
+        run: gem install bundler
+
+      # Installa le dipendenze dal Gemfile.lock
+      - name: Install dependencies
+        run: bundle install --jobs 4 --retry 3
 
       # Esegue il comando di compilazione di Jekyll
+      # Nota: --future è opzionale, usalo solo se hai post con data futura
       - name: Build Jekyll Site
         run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production
       
-      # Carica la cartella _site come artefatto di deploy
+      # Carica la cartella _site come artefatto che verrà pubblicato
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -43,12 +53,13 @@ jobs:
 
   # Lavoro 2: Pubblicazione su GitHub Pages
   deploy:
+    # Dipende dal successo del lavoro 'build'
+    needs: build 
     environment:
-      # Assicurati che l'ambiente sia definito come 'github-pages'
+      # L'ambiente 'github-pages' è richiesto dal deploy-pages action
       name: github-pages 
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build # Dipende dal successo del lavoro 'build'
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
