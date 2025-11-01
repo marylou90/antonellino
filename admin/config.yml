@@ -1,9 +1,13 @@
 # ---------------------------------------------
-# CONFIGURAZIONE BACKEND (GIT GATEWAY)
+# CONFIGURAZIONE BACKEND (GITHUB)
 # ---------------------------------------------
 backend:
-  name: git-gateway
-  branch: main 
+  name: github 
+  repo: marylou90/antonellino # Sostituisci con il tuo Owner/Repo
+  branch: main # Il tuo ramo principale
+  auth_scope: repo # Permesso richiesto per l'autenticazione
+  base_url: https://github.com # Endpoint base (standard)
+  auth_endpoint: authorize # Endpoint di autorizzazione (standard)
 
 media_folder: "assets/uploads" # Dove verranno salvate le immagini nel tuo repository (relativo alla root del progetto)
 public_folder: "/assets/uploads" # Come verranno referenziate le immagini nel codice HTML (relativo alla root del sito)
