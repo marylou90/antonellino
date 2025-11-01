@@ -6,6 +6,7 @@ backend:
   repo: marylou90/antonellino # Sostituisci con il tuo Owner/Repo
   branch: main # Il tuo ramo principale
   auth_scope: repo # Permesso richiesto per l'autenticazione
+  client_id: Ov23lioVNFpGxkJKWrfl
   base_url: https://github.com # Endpoint base (standard)
   auth_endpoint: authorize # Endpoint di autorizzazione (standard)
 
