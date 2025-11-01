@@ -30,3 +30,8 @@ end
 gem "jekyll-sitemap"
 gem "jekyll-mentions"
 gem "jekyll-paginate"
+gem "jekyll-seo-tag"
+gem "jekyll-redirect-from"
+gem "jekyll-commonmark"
+gem "jekyll-include-cache"
+gem "jemoji"
