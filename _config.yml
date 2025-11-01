@@ -15,6 +15,7 @@ exclude:
   - alembic-jekyll-theme.gemspec
   - .jekyll-cache
   # Escludiamo le cartelle di Decap CMS dalla compilazione del sito finale
+include:
   - admin/
 
 # 2. Installed Gems (Modificato per Jekyll 4.3 e per risolvere conflitti CI)
