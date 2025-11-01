@@ -22,21 +22,21 @@ jobs:
       - name: Checkout del codice
         uses: actions/checkout@v4
 
-      # Configura Ruby (fondamentale per Jekyll)
+      # Setup Ruby: Usiamo 3.0 (più stabile in CI)
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          # Usa una versione supportata e stabile di Ruby
-          ruby-version: '3.1' 
-          # Il gestore della cache è disabilitato per evitare conflitti con 'gem install'
+          ruby-version: '3.0' # Passiamo a 3.0 per la compatibilità
           
-      # Passo aggiunto per risolvere l'errore 'gem failed with exit code 1'
-      - name: Update Bundler
-        run: gem install bundler
+      # Passo per forzare la corretta installazione di bundler
+      - name: Install Bundler
+        run: gem install bundler -v 2.4.22 --no-document 
 
-      # Installa le dipendenze dal Gemfile.lock
+      # Esegui il bundle install con correzione dei permessi
       - name: Install dependencies
-        run: bundle install --jobs 4 --retry 3
+        run: |
+          bundle config set --local path vendor/bundle
+          bundle install --jobs 4 --retry 3 --clean
 
       # Esegue il comando di compilazione di Jekyll
       # Nota: --future è opzionale, usalo solo se hai post con data futura
