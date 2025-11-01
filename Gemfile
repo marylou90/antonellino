@@ -29,3 +29,4 @@ end
 
 gem "jekyll-sitemap"
 gem "jekyll-mentions"
+gem "jekyll-paginate"
