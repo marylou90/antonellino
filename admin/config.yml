@@ -1,6 +1,7 @@
 backend:
-  name: git-gateway # Metodo comune per Netlify/GitHub
-  branch: main      # Il ramo Git dove salvare i contenuti
+  name: github
+  repo: marylou90/antonellino
+  branch: main                
 
 # Definisci le cartelle per l'upload media
 media_folder: "assets/uploads"
@@ -12,7 +13,7 @@ collections:
   # COLLEZIONE 1: VINI E CANTINE
   # Useremo le COLLECTIONS DI JEKYLL (cartelle con _)
   # ---------------------------------------------
-  - name: "Vini e cantine"
+  - name: "vini_cantine"
     label: "Vini e cantine"
     # Questa cartella deve esistere e inizia con _ per Jekyll
     folder: "_vinicantine" 
@@ -26,7 +27,7 @@ collections:
   # ---------------------------------------------
   # COLLEZIONE 2: RISTORANTI E OSTERIE
   # ---------------------------------------------
-  - name: "Ristoranti e osterie"
+  - name: "ristoranti_osterie"
     label: "Ristoranti e osterie"
     folder: "_ristorantiosterie"
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
