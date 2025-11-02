@@ -6,12 +6,32 @@
   <title>Amministrazione Contenuti</title>
 </head>
 <body>
-  
+  <h1>Admin</h1>
+  <p>Se l'accesso non funziona, apri la console per vedere gli errori.</p>
+
+  <!-- Carica Decap CMS (NetlifyCMS fork) -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  
+
   <script>
-    CMS.init();
+    // Debug: intercetta errori globali
+    window.addEventListener('error', function(e){
+      console.error('Global error:', e.error || e.message, e);
+    });
+
+    window.addEventListener('unhandledrejection', function(e){
+      console.error('Unhandled promise rejection:', e.reason);
+    });
+
+    try {
+      // Prova ad inizializzare la CMS. Senza argomenti, carica admin/config.yml automaticamente.
+      console.info('Inizializzo CMS...');
+      CMS.init();
+      console.info('CMS.init() chiamato — controlla la console per eventuali errori di autenticazione.');
+    } catch (err) {
+      console.error('Errore inizializzazione CMS:', err);
+      document.body.insertAdjacentHTML('beforeend', '<pre style="color:red;">Errore inizializzazione CMS: ' + String(err) + '</pre>');
+    }
   </script>
-  
+
 </body>
 </html>
