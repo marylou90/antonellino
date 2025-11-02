@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Auth0 continue</title>
+</head>
+<body>
+  <script>
+    (function(){
+      function parseHash(hash) {
+        const params = {};
+        hash.replace(/^#/, '').split('&').forEach(function(part){
+          const kv = part.split('=');
+          if (kv[0]) params[decodeURIComponent(kv[0])] = decodeURIComponent(kv[1] || '');
+        });
+        return params;
+      }
+
+      const params = parseHash(window.location.hash || '');
+      const idToken = params.id_token;
+      if (!idToken) {
+        if (window.opener) window.opener.postMessage({ error: 'no_id_token' }, '*');
+        return;
+      }
+
+      function decodeJwt(token) {
+        const parts = token.split('.');
+        if (parts.length < 2) return null;
+        const payload = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+        try {
+          const json = decodeURIComponent(atob(payload).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+          }).join(''));
+          return JSON.parse(json);
+        } catch (e) {
+          console.error('Error decoding JWT', e);
+          return null;
+        }
+      }
+
+      const payload = decodeJwt(idToken);
+      const claimName = 'https://antonellino.example.com/github_access_token';
+      const githubToken = payload && payload[claimName];
+
+      if (!githubToken) {
+        if (window.opener) window.opener.postMessage({ error: 'no_github_token' }, '*');
+        return;
+      }
+
+      if (window.opener) {
+        window.opener.postMessage({ token: githubToken }, '*');
+      } else {
+        document.body.innerText = 'Token: ' + githubToken;
+      }
+
+      setTimeout(function(){ window.close(); }, 500);
+    })();
+  </script>
+</body>
+</html>

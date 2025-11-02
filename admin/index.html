@@ -9,15 +9,13 @@
   <h1>Admin</h1>
   <p>Se l'accesso non funziona, apri la console per vedere gli errori.</p>
 
-  <!-- Carica Decap CMS (NetlifyCMS fork) -->
+  <!-- Carica Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
   <script>
-    // Debug: intercetta errori globali
     window.addEventListener('error', function(e){
       console.error('Global error:', e.error || e.message, e);
     });
-
     window.addEventListener('unhandledrejection', function(e){
       console.error('Unhandled promise rejection:', e.reason);
     });
