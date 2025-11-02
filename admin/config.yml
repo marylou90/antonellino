@@ -1,10 +1,20 @@
 backend:
-  name: github
+  name: git-gateway # 👈 DEVE ESSERE QUESTO
   repo: marylou90/antonellino
   branch: main
-  # auth_endpoint: URL di autorizzazione su Auth0 che la CMS aprirà in popup.
-  # Nota: l'URL è composto per la response_type che restituisce id_token e token
-  auth_endpoint: "https://dev-4yo3p57jb27ie4qp.eu.auth0.com/authorize?response_type=id_token%20token&scope=openid%20profile%20email&client_id=a85gJGJkf36yAPrzhTojwcgcRr0mpDmU&redirect_uri=https://dev-4yo3p57jb27ie4qp.eu.auth0.com/continue"
+  
+# ❗ BLOCCO AUTH0 CORRETTO: 
+# Utilizza il dominio e il Client ID che hai configurato in Auth0
+auth:
+  provider: auth0
+  # Dominio del tuo account Auth0 (es. dev-4yo3p57jb27ie4qp.eu.auth0.com)
+  site_domain: 'dev-4yo3p57jb27ie4qp.eu.auth0.com'
+  # Client ID della tua applicazione Auth0
+  app_id: 'a85gJGJkf36yAPrzhTojwcgcRr0mpDmU' 
+
+  # ⚠️ AGGIUNGI IL CLAIM NAME DALL'AZIONE AUTH0 (Cruciale per i permessi GitHub)
+  auth_config:
+    github_access_token_claim: 'https://antonellino.io/github_access_token'
 
 media_folder: assets/uploads
 public_folder: /assets/uploads
