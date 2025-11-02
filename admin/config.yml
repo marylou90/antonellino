@@ -1,38 +1,28 @@
-# ---------------------------------------------
-# CONFIGURAZIONE BACKEND (GITHUB)
-# ---------------------------------------------
 backend:
   name: github
   repo: marylou90/antonellino
   branch: main
-  # auth_endpoint: l'URL che avvia il flow su Auth0; vedrai un popup che chiama Auth0 authorize
-  auth_endpoint: "https://dev-4yo3p57jb27ie4qp.eu.auth0.com/authorize?response_type=id_token%20token&scope=openid%20profile%20email&client_id=a85gJGJkf36yAPrzhTojwcgcRr0mpDmU&redirect_uri=https://marylou90.github.io/antonellino/auth/continue/"
+  # auth_endpoint: URL di autorizzazione su Auth0 che la CMS aprirà in popup.
+  # Nota: l'URL è composto per la response_type che restituisce id_token e token
+  auth_endpoint: "https://dev-4yo3p57jb27ie4qp.eu.auth0.com/authorize?response_type=id_token%20token&scope=openid%20profile%20email&client_id=a85gJGJkf36yAPrzhTojwcgcRr0mpDmU&redirect_uri=https://dev-4yo3p57jb27ie4qp.eu.auth0.com/continue"
 
 media_folder: assets/uploads
 public_folder: /assets/uploads
 
-# ---------------------------------------------
-# DEFINIZIONE DELLE COLLEZIONI
-# ---------------------------------------------
 collections:
-  
-  # 1. COLLEZIONE VINI E CANTINE
   - name: "vini_e_cantine"
     label: "Vini e Cantine"
-    # Questa cartella deve esistere nel tuo repository!
-    folder: "_vini_e_cantine" 
+    folder: "_vini_e_cantine"
     create: true
-    slug: "{{slug}}" # Usa solo il nome pulito nel file (senza data)
+    slug: "{{slug}}"
     fields:
       - {label: "Titolo", name: "title", widget: "string", required: true}
       - {label: "Data di Pubblicazione", name: "date", widget: "datetime"}
       - {label: "Immagine in Evidenza", name: "image", widget: "image", required: false, hint: "Immagine principale per la sezione"}
       - {label: "Contenuto", name: "body", widget: "markdown"}
-      
-  # 2. COLLEZIONE RISTORANTI E OSTERIE
+
   - name: "ristoranti_e_osterie"
     label: "Ristoranti e Osterie"
-    # Questa cartella deve esistere nel tuo repository!
     folder: "_ristoranti_e_osterie"
     create: true
     slug: "{{slug}}"
@@ -41,9 +31,3 @@ collections:
       - {label: "Data di Pubblicazione", name: "date", widget: "datetime"}
       - {label: "Immagine in Evidenza", name: "image", widget: "image", required: false, hint: "Immagine principale per la sezione"}
       - {label: "Contenuto", name: "body", widget: "markdown"}
-      
-  # (Se avevi una collezione 'posts' precedente, la puoi aggiungere qui sotto)
-  # - name: "posts"
-  #   label: "Articoli Generali"
-  #   folder: "_posts"
-  #   ... (campi) ...
