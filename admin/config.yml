@@ -6,7 +6,7 @@ backend:
   repo: marylou90/antonellino
   branch: main
   # auth_endpoint: l'URL che avvia il flow su Auth0; vedrai un popup che chiama Auth0 authorize
-  auth_endpoint: "https://dev-4yo3p57jb27ie4qp.eu.auth0.com/authorize?response_type=id_token%20token&scope=openid%20profile%20email&client_id=YOUR_AUTH0_CLIENT_ID&redirect_uri=https://dev-4yo3p57jb27ie4qp.eu.auth0.com/continue"
+  auth_endpoint: "https://dev-4yo3p57jb27ie4qp.eu.auth0.com/authorize?response_type=id_token%20token&scope=openid%20profile%20email&client_id=a85gJGJkf36yAPrzhTojwcgcRr0mpDmU&redirect_uri=https://marylou90.github.io/antonellino/auth/continue/"
 
 media_folder: assets/uploads
 public_folder: /assets/uploads
