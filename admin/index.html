@@ -7,23 +7,10 @@
 </head>
 <body>
   
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  
   <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
   
   <script>
-    // 3. Funzione di controllo e reindirizzamento (Netlify Identity)
-    // Questa funzione è fondamentale per far funzionare il login su Netlify.
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
-    }
+    CMS.init();
   </script>
-  
-</body>
+  </body>
 </html>
