@@ -17,6 +17,7 @@ exclude:
   # Escludiamo le cartelle di Decap CMS dalla compilazione del sito finale
 include:
   - admin/
+  - auth/
 
 # 2. Installed Gems (Modificato per Jekyll 4.3 e per risolvere conflitti CI)
 plugins:
