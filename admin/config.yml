@@ -6,14 +6,6 @@ backend:
   repo: marylou90/antonellino
   branch: main
 
-auth:
-  # Configura Auth0 come server di autenticazione
-  provider: auth0
-  # Usa il Dominio del tuo account Auth0
-  site_domain: 'dev-4yo3p57jb27ie4qp.eu.auth0.com' 
-  # Usa il Client ID della tua Applicazione Auth0 (non quello di GitHub)
-  app_id: 'a85gJGJkf36yAPrzhTojwcgcRr0mpDmU'
-
 media_folder: assets/uploads
 public_folder: /assets/uploads
 
