@@ -2,7 +2,7 @@
 # CONFIGURAZIONE BACKEND (GITHUB)
 # ---------------------------------------------
 backend:
-  name: git-gateway 
+  name: github
   repo: marylou90/antonellino
   branch: main
 
