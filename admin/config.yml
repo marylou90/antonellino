@@ -2,15 +2,19 @@
 # CONFIGURAZIONE BACKEND (GITHUB)
 # ---------------------------------------------
 backend:
-  name: github 
-  repo: marylou90/antonellino # Sostituisci con il tuo Owner/Repo
-  branch: main # Il tuo ramo principale
-  client_id: "Ov23lioVNFpGxkJKWrfl"
-  #base_url: https://github.com 
-  #auth_endpoint: login/oauth/authorize
+  name: git-gateway 
+  branch: main
 
-media_folder: "assets/uploads" # Dove verranno salvate le immagini nel tuo repository (relativo alla root del progetto)
-public_folder: "/assets/uploads" # Come verranno referenziate le immagini nel codice HTML (relativo alla root del sito)
+auth:
+  # Configura Auth0 come server di autenticazione
+  provider: auth0
+  # Usa il Dominio del tuo account Auth0
+  site_domain: 'dev-4yo3p57jb27ie4qp.eu.auth0.com' 
+  # Usa il Client ID della tua Applicazione Auth0 (non quello di GitHub)
+  app_id: 'a85gJGJkf36yAPrzhTojwcgcRr0mpDmU'
+
+media_folder: assets/uploads
+public_folder: /assets/uploads
 
 # ---------------------------------------------
 # DEFINIZIONE DELLE COLLEZIONI
