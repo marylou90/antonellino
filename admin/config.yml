@@ -3,6 +3,7 @@
 # ---------------------------------------------
 backend:
   name: git-gateway 
+  repo: marylou90/antonellino
   branch: main
 
 auth:
